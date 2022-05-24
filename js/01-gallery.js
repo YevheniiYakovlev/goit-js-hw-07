@@ -39,8 +39,8 @@ const containerGalleryEl = document.querySelector('.gallery');
 const galleryMarkup = createGalary(galleryItems);
 
 function createGalary(galleryItems) {
-  return galleryItems.map(({original, preview, description}) => {
-      return `<div class="gallery__item">
+    return galleryItems.map(({ original, preview, description }) => {
+        return `<div class="gallery__item">
                     <a class="gallery__link" href="${original}">
                     <img
                     style="display:block"
@@ -50,12 +50,22 @@ function createGalary(galleryItems) {
                     alt="${description}"
                     />
                 </a>
-                </div>`
-            
-        })
+                </div>`;
+    }).join("");
 }
 
-containerGalleryEl.insertAdjacentHTML('beforeend',galleryMarkup);
+function onItemGalerryClick(evt) {
+
+    if (!evt.target.classList.contains('gallery__link')) {
+        return;
+    }
+    console.log(evt.target,'this click');
+    
+
+}
+
+containerGalleryEl.insertAdjacentHTML('beforeend', galleryMarkup);
+containerGalleryEl.addEventListener('click', onItemGalerryClick)
 
 
 
