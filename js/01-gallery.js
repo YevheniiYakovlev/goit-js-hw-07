@@ -56,7 +56,7 @@ function createGalary(galleryItems) {
 
 function onItemGalerryClick(evt) {
 
-    if (!evt.target.classList.contains('gallery__link')) {
+    if (!evt.target.nodName('gallery__link')) {
         return;
     }
     console.log(evt.target,'this click');
@@ -72,3 +72,29 @@ containerGalleryEl.addEventListener('click', onItemGalerryClick)
 console.log(containerGalleryEl);
 
 console.log(galleryItems);
+
+
+let instance;
+	    function modalShow(src) {
+        instance = basicLightbox.create(
+            `
+        <div class="modal">
+            <img src="${src}" style="height:100vh; display:block"></img>
+        </div>
+        `,
+    {
+        onShow: instance => {
+        addListener();
+        },
+        onClose: instance => {
+        removeListener();
+        },
+    },
+);
+    instance.show();
+}
+
+
+
+
+
