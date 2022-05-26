@@ -37,6 +37,11 @@ import { galleryItems } from './gallery-items.js';
 
 const containerGalleryEl = document.querySelector('.gallery');
 const galleryMarkup = createGalary(galleryItems);
+const itemGalerryClick = onItemGalerryClick;
+
+containerGalleryEl.insertAdjacentHTML('beforeend', galleryMarkup);
+containerGalleryEl.addEventListener('click', itemGalerryClick);
+
 
 function createGalary(galleryItems) {
     return galleryItems.map(({ original, preview, description }) => {
@@ -56,18 +61,13 @@ function createGalary(galleryItems) {
 
 function onItemGalerryClick(evt) {
 
-    if (!evt.target.nodName('gallery__link')) {
+    if (evt.target.nodeName !== "IMG") {
         return;
     }
-    console.log(evt.target,'this click');
-    
-
+    console.log(evt.target, 'this click');
+    evt.preventDefault();
+    modalShow(evt.target.dataset.source);
 }
-
-containerGalleryEl.insertAdjacentHTML('beforeend', galleryMarkup);
-containerGalleryEl.addEventListener('click', onItemGalerryClick)
-
-
 
 console.log(containerGalleryEl);
 
@@ -75,7 +75,7 @@ console.log(galleryItems);
 
 
 let instance;
-	    function modalShow(src) {
+	function modalShow(src) {
         instance = basicLightbox.create(
             `
         <div class="modal">
@@ -92,7 +92,21 @@ let instance;
     },
 );
     instance.show();
+    }
+function addListener() {
+  window.addEventListener('keydown', onEscClick);
 }
+
+function onEscClick(event) {
+  if (event.code === 'Escape') {
+    instance.close();
+  }
+}
+
+function removeListener() {
+  window.removeEventListener('keydown', onEscClick);
+}
+
 
 
 
