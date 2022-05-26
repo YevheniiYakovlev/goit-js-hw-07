@@ -27,12 +27,12 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-const galleryContainer = document.querySelector('.gallery');
-const galleryItemsMarkup = createGalleryItemsMarkup(galleryItems);
+const containerGalleryEl = document.querySelector('.gallery');
+const galleryMarkup = createGalary(galleryItems);
 
-galleryContainer.insertAdjacentHTML("beforeend", galleryItemsMarkup);
+containerGalleryEl.insertAdjacentHTML("beforeend", galleryMarkup);
 
-function createGalleryItemsMarkup(galleryItems) {
+function createGalary(galleryItems) {
     return galleryItems.map(({ preview, original, description }) => {
         return `
         <li>
@@ -47,11 +47,14 @@ function createGalleryItemsMarkup(galleryItems) {
 	    </li>
         `;
     }).join("");
-}
+};
+console.log(containerGalleryEl, "hello try")
 
 
 let gallery = new SimpleLightbox('.gallery a', {
 	captions: true,
 	captionsData: 'alt',
 	captionDelay: 250,
-    });
+});
+    
+
